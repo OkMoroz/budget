@@ -3,6 +3,7 @@ import Balance from "../Balance";
 import Transactions from "../Transactions";
 import Form from "../Form";
 import { Wrapper } from "./styles";
+import ErrorBoundary from "../ErrorBoundary";
 
 let id = 0;
 
@@ -18,13 +19,14 @@ class Home extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange = (value) => {
+  onChange = ({ value, date, comment }) => {
     this.setState((state) => ({
       balance: state.balance + Number(value),
       transactions: [
         {
-          value,
-          label: "change",
+          value: +value,
+          comment: "",
+          date,
           id: ++id,
         },
         ...state.transactions,
@@ -34,12 +36,14 @@ class Home extends Component {
 
   render() {
     return (
-      <Wrapper>
+      <ErrorBoundary>
+        <Wrapper>
           <Balance balance={this.state.balance} />
           <Form onChange={this.onChange} />
           <hr />
           <Transactions transactions={this.state.transactions} />
-      </Wrapper>
+        </Wrapper>
+      </ErrorBoundary>
     );
   }
 }
