@@ -21,9 +21,10 @@ class Form extends Component {
     const { value } = event.target;
 
     this.setState({
-      value,
+      value: +value,
     });
   };
+
   render() {
     return (
       <form onSubmit={this.onSubmit}>
