@@ -13,11 +13,9 @@ function open() {
   return new Promise(function (resolve, reject) {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
 
-    // We can only create Object stores in a versionchange transaction.
     request.onupgradeneeded = function (e) {
       const db = e.target.result;
 
-      // A versionchange transaction is started automatically.
       e.target.transaction.onerror = html5rocks.indexedDB.onerror;
 
       if (db.objectStoreNames.contains(DB_NAME)) {
@@ -46,11 +44,11 @@ function addItem(item) {
   const request = store.put(item);
 
   request.onsuccess = function (e) {
-    console.log("success");
+    console.log("Дані успішно додані до бази даних.", item);
   };
 
   request.onerror = function (e) {
-    console.log("Error Adding: ", e);
+    console.error("Помилка додавання даних до бази даних:", e.target.error);
   };
 }
 
@@ -62,11 +60,11 @@ function deleteItem(id) {
   const request = store.delete(id);
 
   request.onsuccess = function (e) {
-    console.log("success");
+    console.log("Успіх");
   };
 
   request.onerror = function (e) {
-    console.log("Error Adding: ", e);
+    console.log("Помилка при додаванн: ", e);
   };
 }
 
