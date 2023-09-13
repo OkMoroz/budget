@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Balance from "../Balance";
 import Transactions from "../Transactions";
 import Form from "../Form";
@@ -6,56 +6,45 @@ import { Wrapper } from "./styles";
 import ErrorBoundary from "../ErrorBoundary";
 import { getItems, addItem } from "../../utils/indexdb";
 
-class Home extends Component {
-  constructor() {
-    super();
+const Home = () => {
+  const [balance, setBalance] = useState(0);
+  const [transactions, setTransactions] = useState([]);
 
-    this.state = {
-      balance: 0,
-      transactions: [],
-    };
+useEffect(() => {
+  getItems()
+    .then((items) => {
+      setTransactions(items);
+    })
+    .catch((e) => {
+      console.error("Помилка отримання даних з IndexedDB:", e);
+    });
+}, [setTransactions]);
 
-    this.onChange = this.onChange.bind(this);
-  }
+ const onChange = ({ value, date, comment }) => {
+   const transaction = {
+     value: +value,
+     comment,
+     date,
+     id: Date.now(),
+   };
 
-  componentDidMount() {
-    getItems()
-      .then((transactions) => {
-        this.setState({ transactions });
-      })
-      .catch((e) => {
-        debugger;
-      });
-  }
+   setTransactions([transaction, ...transactions]);
+   setBalance(balance + Number(value));
 
-  onChange = ({ value, date, comment }) => {
-    const transaction = {
-      value: +value,
-      comment,
-      date,
-      id: Date.now(),
-    };
+   addItem(transaction);
+ };
 
-    this.setState((state) => ({
-      balance: state.balance + Number(value),
-      transactions: [transaction, ...state.transactions],
-    }));
 
-    addItem(transaction);
-  };
-
-  render() {
-    return (
-      <ErrorBoundary>
-        <Wrapper>
-          <Balance balance={this.state.balance} />
-          <Form onChange={this.onChange} />
-          <hr />
-          <Transactions transactions={this.state.transactions} />
-        </Wrapper>
-      </ErrorBoundary>
-    );
-  }
-}
+  return (
+    <ErrorBoundary>
+      <Wrapper>
+        <Balance balance={balance} />
+        <Form onChange={onChange} />
+        <hr />
+        <Transactions transactions={transactions} />
+      </Wrapper>
+    </ErrorBoundary>
+  );
+};
 
 export default Home;
