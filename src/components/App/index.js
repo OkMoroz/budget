@@ -9,13 +9,12 @@ import About from "../About";
 import Statistics from "../Statistics";
 import Header from "../Header";
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
     };
   }
 
@@ -24,8 +23,9 @@ class App extends React.Component {
       .then(() => {
         this.setState({
           loading: false,
-        })
-      }).catch(() => {
+        });
+      })
+      .catch(() => {
         console.error("Помилка");
       });
   }
@@ -33,21 +33,21 @@ class App extends React.Component {
   render() {
     if (this.state.loading) {
       return <div>Loading...</div>;
-    };
+    }
 
     return (
-      <Router>
-        <Wrapper>
-          <GlobalStyle />
-          <Header/>
+        <Router>
+          <Wrapper>
+            <GlobalStyle />
+            <Header />
 
-          <Routes>
-            <Route path="/about" element={<About />} />
-            <Route path="/statistics" element={<Statistics />} />
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </Wrapper>
-      </Router>
+            <Routes>
+              <Route path="/about" element={<About />} />
+              <Route path="/statistics" element={<Statistics />} />
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </Wrapper>
+        </Router>
     );
   }
 }
