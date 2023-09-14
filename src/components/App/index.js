@@ -1,13 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { GlobalStyle, Wrapper } from "./styles";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { open } from "../../utils/indexdb";
-
 import Home from "../Home";
 import About from "../About";
+import Settings from "../Settings";
 import Statistics from "../Statistics";
 import Header from "../Header";
+
+import { Wrapper, GlobalStyle } from "./styles";
 
 class App extends React.Component {
   constructor(props) {
@@ -36,18 +37,19 @@ class App extends React.Component {
     }
 
     return (
-        <Router>
-          <Wrapper>
-            <GlobalStyle />
-            <Header />
+      <Router>
+        <Wrapper>
+          <GlobalStyle />
+          <Header />
 
-            <Routes>
-              <Route path="/about" element={<About />} />
-              <Route path="/statistics" element={<Statistics />} />
-              <Route path="/" element={<Home />} />
-            </Routes>
-          </Wrapper>
-        </Router>
+          <Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/statistics" element={<Statistics />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </Wrapper>
+      </Router>
     );
   }
 }

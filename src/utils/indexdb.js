@@ -13,9 +13,11 @@ function open() {
   return new Promise(function (resolve, reject) {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
 
+    // We can only create Object stores in a versionchange transaction.
     request.onupgradeneeded = function (e) {
       const db = e.target.result;
 
+      // A versionchange transaction is started automatically.
       e.target.transaction.onerror = html5rocks.indexedDB.onerror;
 
       if (db.objectStoreNames.contains(DB_NAME)) {
@@ -37,35 +39,39 @@ function open() {
 }
 
 function addItem(item) {
-  const db = html5rocks.indexedDB.db;
-  const trans = db.transaction([DB_NAME], "readwrite");
-  const store = trans.objectStore(DB_NAME);
+  return new Promise((resolve, reject) => {
+    const db = html5rocks.indexedDB.db;
+    const trans = db.transaction([DB_NAME], "readwrite");
+    const store = trans.objectStore(DB_NAME);
 
-  const request = store.put(item);
+    const request = store.put(item);
 
-  request.onsuccess = function (e) {
-    console.log("Дані успішно додані до бази даних.", item);
-  };
+    request.onsuccess = function (e) {
+      resolve();
+    };
 
-  request.onerror = function (e) {
-    console.error("Помилка додавання даних до бази даних:", e.target.error);
-  };
+    request.onerror = function (e) {
+      reject(e);
+    };
+  });
 }
 
 function deleteItem(id) {
-  const db = html5rocks.indexedDB.db;
-  const trans = db.transaction([DB_NAME], "readwrite");
-  const store = trans.objectStore(DB_NAME);
+  return new Promise((resolve, reject) => {
+    const db = html5rocks.indexedDB.db;
+    const trans = db.transaction([DB_NAME], "readwrite");
+    const store = trans.objectStore(DB_NAME);
 
-  const request = store.delete(id);
+    const request = store.delete(id);
 
-  request.onsuccess = function (e) {
-    console.log("Успіх");
-  };
+    request.onsuccess = function (e) {
+      resolve();
+    };
 
-  request.onerror = function (e) {
-    console.log("Помилка при додаванн: ", e);
-  };
+    request.onerror = function (e) {
+      reject(e);
+    };
+  });
 }
 
 function getItems() {
@@ -85,4 +91,6 @@ function getItems() {
   });
 }
 
-export { open, addItem, getItems, deleteItem };
+const updateItem = (item) => addItem(item);
+
+export { open, addItem, getItems, deleteItem, updateItem };

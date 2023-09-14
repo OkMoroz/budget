@@ -1,0 +1,7 @@
+{
+  "editor.tokenColorCustomizations": {
+    "comments": "#008000", // Кольори коментарів
+    "strings": "#ff0000", // Кольори рядків
+    "variables": "#0000ff" // Кольори змінних
+  }
+}
