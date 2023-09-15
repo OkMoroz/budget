@@ -1,9 +1,10 @@
-import { useContext, useMemo,  memo } from "react";
+import { useContext, useMemo, useState, memo } from "react";
 
 import { AppContext } from "../../providers/context";
 import { LOCALES } from "../../providers/i18n";
 import { useBooleanToggle } from "../../hooks";
-import {saveToStorage} from  "../../utils/sessionStorage"
+import { saveToStorage } from "../../utils/sessionStorage";
+import { addData } from "../../utils/generate";
 
 const Test = memo(({ data }) => {
   console.log("rendering");
@@ -33,7 +34,7 @@ const Setting = () => {
       locale: value,
     });
 
-saveToStorage('local', value)
+    saveToStorage("locale", value);
   };
 
   const data = useMemo(() => [2], []);
@@ -43,6 +44,8 @@ saveToStorage('local', value)
       <h1>Налаштування</h1>
 
       <Test data={data} />
+
+      <button onClick={addData}>Add data</button>
 
       <div>
         <form>
@@ -60,6 +63,7 @@ saveToStorage('local', value)
               </select>
             </label>
           </div>
+
           <div>
             <label>
               Мова:

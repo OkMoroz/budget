@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 import { STATUSES } from "./constants";
-import { getItems, addItem, deleteItem, updateItem } from "./utils/indexdb";
+import { getData, addItem, deleteItem, updateItem } from "./utils/indexdb";
 
 export const useBooleanToggle = (initialStatus = false) => {
   const [status, setStatus] = useState(initialStatus);
@@ -22,35 +22,56 @@ export const useData = () => {
     transactions: [],
     error: "",
     status: STATUSES.IDLE,
+    hasNextPage: true,
   });
 
   useEffect(() => {
-    console.log("Fetching data...");
-    setState((prevState) => ({
-      ...prevState,
+    setState({
+      ...state,
       status: STATUSES.PENDING,
-    }));
+    });
 
-    getItems()
+    getData(0, 20)
       .then((transactions) => {
-        console.log("Data loaded successfully!");
-        console.log("Transactions:", transactions);
-        setState((prevState) => ({
-          ...prevState,
+        setState({
+          ...state,
           transactions,
           status: STATUSES.SUCCESS,
-        }));
+          hasNextPage: true,
+        });
       })
       .catch((e) => {
-        console.error("Error loading data:", e);
-        setState((prevState) => ({
-          ...prevState,
+        setState({
+          ...state,
           transactions: [],
           status: STATUSES.ERROR,
           error: e,
-        }));
+          hasNextPage: false,
+        });
       });
   }, []);
+
+  const loadMoreRows = useCallback(() => {
+    setState({
+      ...state,
+      status: STATUSES.PENDING,
+    });
+
+    getData(state.transactions.length, 20)
+      .then((transactions) => {
+        setState({
+          ...state,
+          transactions: [...state.transactions, ...transactions],
+          status: STATUSES.SUCCESS,
+        });
+      })
+      .catch(() => {
+        setState({
+          ...state,
+          hasNextPage: false,
+        });
+      });
+  }, [state]);
 
   const pushTransaction = useCallback(
     (data) => {
@@ -60,9 +81,9 @@ export const useData = () => {
         id: Date.now(),
       };
 
-      setState((prevState) => ({
-        ...prevState,
-        transactions: [transaction, ...prevState.transactions],
+      setState((state) => ({
+        ...state,
+        transactions: [transaction, ...state.transactions],
       }));
 
       addItem(transaction);
@@ -72,9 +93,9 @@ export const useData = () => {
 
   const onDelete = useCallback(
     (id) => {
-      setState((prevState) => ({
-        ...prevState,
-        transactions: prevState.transactions.filter((item) => item.id !== id),
+      setState((state) => ({
+        ...state,
+        transactions: state.transactions.filter((item) => item.id !== id),
       }));
 
       deleteItem(id);
@@ -90,9 +111,9 @@ export const useData = () => {
         ...item,
         isStarred: !item.isStarred,
       }).then(() => {
-        setState((prevState) => ({
-          ...prevState,
-          transactions: prevState.transactions.map((item) =>
+        setState((state) => ({
+          ...state,
+          transactions: state.transactions.map((item) =>
             item.id !== id
               ? item
               : {
@@ -111,5 +132,6 @@ export const useData = () => {
     pushTransaction,
     onDelete,
     onStarClick,
+    loadMoreRows,
   };
 };

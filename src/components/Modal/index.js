@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
+
 import { Portal } from "../Portal";
 
 const Backdrop = styled.div`
@@ -13,7 +14,7 @@ const Backdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-    opacity: 1;
+  opacity: 1;
 `;
 
 const Content = styled.div`
@@ -32,23 +33,22 @@ const Content = styled.div`
 `;
 
 export const Modal = ({ open, onClose, children }) => {
-    const backdrop = useRef(null);
-   
-    const onClick = (e) => {
-        if (backdrop.current === e.target) {
-            onClose();
-        }
+  const backdrop = useRef(null);
+  if (!open) {
+    return null;
+  }
+
+  const onClick = (e) => {
+    if (backdrop.current === e.target) {
+      onClose();
     }
+  };
 
-     if (!open) {
-       return null;
-     }
-
-    return (
-      <Portal>
-        <Backdrop ref={backdrop} onClick={onClick}>
-          <Content>{children}</Content>
-        </Backdrop>
-      </Portal>
-    );
-}
+  return (
+    <Portal>
+      <Backdrop ref={backdrop} onClick={onClick}>
+        <Content>{children}</Content>
+      </Backdrop>
+    </Portal>
+  );
+};

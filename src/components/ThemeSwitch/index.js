@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../providers/context";
 import { THEMES } from "../../providers/themes/themeList";
-import {saveToStorage}from '../../utils/sessionStorage'
+import { saveToStorage } from "../../utils/sessionStorage";
 
 export const ThemeSwitch = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -12,7 +12,7 @@ export const ThemeSwitch = () => {
       themeName,
     });
 
-    saveToStorage('themeName',themeName)
+    saveToStorage("themeName", themeName);
   };
 
   return (
