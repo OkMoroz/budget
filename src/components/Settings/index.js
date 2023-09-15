@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState, memo } from "react";
+import { useContext, useMemo,  memo } from "react";
 
 import { AppContext } from "../../providers/context";
 import { LOCALES } from "../../providers/i18n";
@@ -46,7 +46,6 @@ saveToStorage('local', value)
 
       <div>
         <form>
-          {" "}
           <div>
             <label>
               Валюта:
