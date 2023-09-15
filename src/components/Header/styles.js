@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const Nav = styled.nav`
   ul {
     display: flex;
@@ -8,6 +7,9 @@ export const Nav = styled.nav`
 
     li {
       margin-right: 25px;
+      a {
+        color: ${({ theme }) => theme.linkColor};
+      }
     }
   }
 `;
