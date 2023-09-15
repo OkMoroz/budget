@@ -1,10 +1,9 @@
-import { useContext, useMemo, useState, memo } from "react";
+import { useContext, useMemo, memo } from "react";
 
 import { AppContext } from "../../providers/context";
 import { LOCALES } from "../../providers/i18n";
 import { useBooleanToggle } from "../../hooks";
 import { saveToStorage } from "../../utils/sessionStorage";
-import { addData } from "../../utils/generate";
 
 const Test = memo(({ data }) => {
   console.log("rendering");
@@ -15,7 +14,6 @@ const Test = memo(({ data }) => {
 const Setting = () => {
   const { state, dispatch } = useContext(AppContext);
   const { status, handleStatusChange } = useBooleanToggle();
-  //const [isAdvancedSettingsShown, setIsAdvancedSettingsShown] = useState(false);
 
   const onChange = (e) => {
     const { value } = e.target;
@@ -44,8 +42,6 @@ const Setting = () => {
       <h1>Налаштування</h1>
 
       <Test data={data} />
-
-      <button onClick={addData}>Add data</button>
 
       <div>
         <form>

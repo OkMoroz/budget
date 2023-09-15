@@ -1,5 +1,3 @@
-import { useState, useEffect, useCallback } from "react";
-
 import Balance from "../Balance";
 import Transactions from "../Transactions";
 
@@ -12,7 +10,6 @@ import { useData } from "../../hooks";
 import { BalanceData } from "../BalanceData";
 
 const Home = () => {
-  // const [balance, setBalance] = useState(0);
 
   const {
     transactions,
@@ -26,7 +23,6 @@ const Home = () => {
 
   const onChange = (transaction) => {
     pushTransaction(transaction);
-    // setBalance(balance + Number(transaction.value))
   };
 
   return (

@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client"; 
 
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import App from "./components/App";
 import { AppContextProvider } from "./providers/context";
 
@@ -11,3 +12,5 @@ root.render(
     <App />
   </AppContextProvider>
 );
+
+serviceWorkerRegistration.register();
