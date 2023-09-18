@@ -7,7 +7,6 @@ function withProfiler(WrappedComponent, id = "") {
     }
 
     onRender = (...data) => {
-      console.log(`ID: ${id}: data: `, data);
     };
 
     render() {

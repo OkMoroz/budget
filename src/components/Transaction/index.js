@@ -2,14 +2,22 @@ import PropTypes from "prop-types";
 import { useContext, useCallback, memo } from "react";
 
 import { AppContext } from "../../providers/context";
-import { Wrapper, TransactionDate, Value, Comment, Icon } from "./styles";
+import {
+  Wrapper,
+  TransactionDate,
+  Value,
+  Comment,
+  Icon,
+  Category,
+  DeleteButton,
+} from "./styles";
 import Star from "../../assets/img/star.svg";
 import StarFilled from "../../assets/img/star_filed.svg";
 
 const Transaction = memo(
   ({
-    transaction: { id, value, date, comment, isStarred },
-    onDelete,
+    transaction: { id, value, date, category, comment, isStarred },
+    onDelete, 
     onStarClick,
   }) => {
     const { state } = useContext(AppContext);
@@ -26,8 +34,9 @@ const Transaction = memo(
         <Value>
           {value.toFixed(2)}, {state.currency}
         </Value>
+        <Category>{category}</Category>
         <Comment>{comment}</Comment>
-        <button onClick={deleteItem}>Delete</button>
+        <DeleteButton onClick={deleteItem}>DELETE</DeleteButton>
       </Wrapper>
     );
   }
@@ -35,9 +44,14 @@ const Transaction = memo(
 
 Transaction.propTypes = {
   transaction: PropTypes.shape({
-    label: PropTypes.string,
+    id: PropTypes.number, 
     value: PropTypes.number,
+    date: PropTypes.string,
+    category: PropTypes.string,
+    comment: PropTypes.string,
+    isStarred: PropTypes.bool,
   }),
+  onDelete: PropTypes.func,
   onStarClick: PropTypes.func,
 };
 

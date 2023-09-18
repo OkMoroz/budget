@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { ThemeSwitch } from "../ThemeSwitch";
@@ -13,26 +14,18 @@ const Header = () => (
           </Link>
         </li>
         <li>
-          <Link to="/statistics">
-            <FormattedMessage id="menu.statistics" />
-          </Link>
-        </li>
-
-        <li>
           <Link to="/settings">
             <FormattedMessage id="menu.settings" />
           </Link>
         </li>
-
         <li>
           <Link to="/about">
             <FormattedMessage id="menu.about" />
           </Link>
         </li>
       </ul>
+      <ThemeSwitch />
     </Nav>
-
-    <ThemeSwitch />
   </div>
 );
 

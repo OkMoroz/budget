@@ -1,61 +1,69 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  background: #fff;
-  border: 1px solid #dbdbdb;
+  background: rgb(185 174 194 / 37%);
+  border: 1px solid rgb(39, 27, 48);
   border-radius: 3px;
   padding: 5px;
   margin-bottom: 10px;
 `;
 Wrapper.displayName = "TransactionWrapper";
 
-export const Input = styled.input`
-  border-radius: 3px;
-  padding: 0 5px;
-  min-width: 80px;
-  margin-bottom: 3px;
-  margin-right: 10px;
-  border: 1px solid #dbdbdb;
-  height: 40px;
-  outline: none;
-`;
-Input.displayName = "Input";
-
 export const Row = styled.div`
   display: flex;
+  padding: 10px;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 `;
 Row.displayName = "Row";
 
-export const Button = styled.button`
-  border: 1px solid #dbdbdb;
-  height: 40px;
-  border-radius: 3px;
-  padding: 0 21px;
-  box-sizing: border-box;
-  background-color: #e0e0e0;
-  color: rgba(0, 0, 0, 0.87);
-  font-size: 18px;
+export const Input = styled.input`
+  border: 1px solid rgb(39, 27, 48);
+  border-radius: 2px;
+  padding: 20px;
+  min-width: 220px;
   outline: none;
-  width: 122px;
-
-  &:hover {
-    cursor: pointer;
-  }
+  min-width: 225px;
 `;
-Button.displayName = "Button";
+Input.displayName = "Input";
 
 export const Comment = styled.textarea`
-  min-height: 40px;
-  line-height: 1.5;
-  box-sizing: border-box;
-  padding: 5px;
+  border: 1px solid rgb(39, 27, 48);
   border-radius: 3px;
-  width: 138px;
-  margin-right: 10px;
-  height: 40px;
-  min-width: 174px;
-  border: 1px solid #dbdbdb;
+  padding: 20px;
   outline: none;
+  width: 88%;
+  margin: 0 auto;
 `;
-Comment.displayName = "Comment";
+
+export const Button = styled.button`
+  border-radius: 3px;
+  padding: 20px 35px;
+  background-color: #fff;
+  border: none;
+  color: rgb(39, 27, 48);
+  font-size: 18px;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d9b3ff;
+    color: #ff868e;
+  }
+`;
+export const CommentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
+export const ButtonRow = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+export const ModalWrapper = styled.div`
+  width: 100%;
+`;

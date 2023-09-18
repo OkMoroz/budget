@@ -9,7 +9,7 @@ const Backdrop = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(51, 51, 51, 0.3);
+  background-color: rgba(39, 27, 48, 0.72);
   backdrop-filter: blur(1px);
   display: flex;
   align-items: center;
@@ -21,12 +21,10 @@ const Content = styled.div`
   position: relative;
   padding: 20px;
   box-sizing: border-box;
-  min-height: 50px;
-  min-width: 50px;
-  max-height: 80%;
-  max-width: 80%;
+  min-height: 100px;
+  min-width: 100px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  background-color: white;
+  background-color: #f4f4f4;
   border-radius: 2px;
   transform: translateY(0);
   opacity: 1;
@@ -38,8 +36,8 @@ export const Modal = ({ open, onClose, children }) => {
     return null;
   }
 
-  const onClick = (e) => {
-    if (backdrop.current === e.target) {
+  const onClick = (event) => {
+    if (backdrop.current === event.target) {
       onClose();
     }
   };

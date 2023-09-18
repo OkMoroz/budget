@@ -37,7 +37,7 @@ const Counter = () => {
         ref={currentValue}
         name="step"
         value={step}
-        onChange={(e) => setStep(+e.target.value)}
+        onChange={(event) => setStep(+event.target.value)}
       />
     </div>
   );

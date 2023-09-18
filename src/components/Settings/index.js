@@ -1,19 +1,26 @@
-import { useContext, useMemo, memo } from "react";
-
+import { useContext } from "react";
+import { ThemeProvider } from "styled-components";
+import { getTheme } from "../../providers/themes/getTheme";
 import { AppContext } from "../../providers/context";
 import { LOCALES } from "../../providers/i18n";
 import { useBooleanToggle } from "../../hooks";
 import { saveToStorage } from "../../utils/sessionStorage";
+import CurrencyExchange from "../CurrencyExchange";
 
-const Test = memo(({ data }) => {
-  console.log("rendering");
-
-  return <div>{JSON.stringify(data)}</div>;
-});
+import {
+  StyledContainer,
+  Heading,
+  SelectWrapper,
+  Button,
+  CurrencySelect,
+  Label,
+  Option,
+} from "./styles";
 
 const Setting = () => {
   const { state, dispatch } = useContext(AppContext);
   const { status, handleStatusChange } = useBooleanToggle();
+  const selectedTheme = getTheme(state.themeName);
 
   const onChange = (e) => {
     const { value } = e.target;
@@ -35,58 +42,52 @@ const Setting = () => {
     saveToStorage("locale", value);
   };
 
-  const data = useMemo(() => [2], []);
-
   return (
-    <>
-      <h1>Налаштування</h1>
+    <ThemeProvider theme={selectedTheme}>
+      <StyledContainer>
+        <Heading>Налаштування</Heading>
 
-      <Test data={data} />
+        <div>
+          <form>
+            <SelectWrapper>
+              <Label>
+                МОВА:
+                <CurrencySelect
+                  name="locale"
+                  onChange={onChangeLocale}
+                  value={state.locale}
+                >
+                  <Option value={LOCALES.UKRAINIAN}>Українська</Option>
+                  <Option value={LOCALES.ENGLISH}>English</Option>
+                </CurrencySelect>
+              </Label>
+            </SelectWrapper>
+            <SelectWrapper>
+              <Label>
+                ВАЛЮТА:
+                <CurrencySelect
+                  name="currency"
+                  onChange={onChange}
+                  value={state.currency}
+                >
+                  <Option value="UAH">Гривня</Option>
+                  <Option value="USD">Долар США</Option>
+                  <Option value="EUR">Євро</Option>
+                </CurrencySelect>
+              </Label>
+            </SelectWrapper>
+          </form>
+        </div>
 
-      <div>
-        <form>
-          <div>
-            <label>
-              Валюта:
-              <select
-                name="currency"
-                onChange={onChange}
-                value={state.currency}
-              >
-                <option value="UAH">Гривня</option>
-                <option value="USD">Долар США</option>
-                <option value="EUR">Євро</option>
-              </select>
-            </label>
-          </div>
-
-          <div>
-            <label>
-              Мова:
-              <select
-                name="locale"
-                onChange={onChangeLocale}
-                value={state.locale}
-              >
-                <option value={LOCALES.UKRAINIAN}>Українська</option>
-                <option value={LOCALES.ENGLISH}>English</option>
-              </select>
-            </label>
-          </div>
-        </form>
-      </div>
-
-      <div>
-        <button onClick={handleStatusChange}>Розширені налаштування</button>
+        <Button onClick={handleStatusChange}>Курс валют</Button>
 
         {status ? (
           <div>
-            <h2>Розширені Налаштування</h2>
-            <p>...</p>
+            <CurrencyExchange />
           </div>
         ) : null}
-      </div>
-    </>
+      </StyledContainer>
+    </ThemeProvider>
   );
 };
 

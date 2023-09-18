@@ -1,5 +1,6 @@
+import { Title } from "./styles";
 const Balance = ({ balance }) => {
-  return <div>Поточний баланс: {balance}</div>;
+  return <Title>Поточний баланс: {balance}</Title>;
 };
 
 export default Balance;

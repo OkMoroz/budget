@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { open } from "../../utils/indexdb";
@@ -9,7 +9,6 @@ import Header from "../Header";
 
 import { Wrapper, GlobalStyle } from "./styles";
 
-const Statistics = lazy(() => import("../Statistics"));
 
 class App extends React.Component {
   constructor(props) {
@@ -45,7 +44,6 @@ class App extends React.Component {
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/about" element={<About />} />
-              <Route path="/statistics" element={<Statistics />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/" element={<Home />} />
             </Routes>

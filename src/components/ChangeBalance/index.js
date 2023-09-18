@@ -22,6 +22,8 @@ const Button = styled.button`
   z-index: 2;
 
   &:hover {
+    background-color: #d9b3ff;
+    color: #ff868e;
     cursor: pointer;
   }
 `;

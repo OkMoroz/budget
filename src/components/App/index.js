@@ -9,7 +9,6 @@ export default () => {
   const { state, dispatch } = useContext(AppContext);
 
   const onRender = (...data) => {
-    console.log(data);
   };
 
   return (
