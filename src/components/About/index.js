@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import { ThemeProvider } from "styled-components";
 import { getTheme } from "../../providers/themes/getTheme";
 import { AppContext } from "../../providers/context";
+import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
+import Footer from "../Footer"
 
 const StyledContainer = styled.div`
   display: flex;
@@ -33,14 +35,6 @@ const ListItem = styled.li`
   color: ${(props) => props.theme.color};
 `;
 
-const Footer = styled.footer`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  font-size: 12px;
-  margin-top: auto;
-`;
-
 const About = () => {
   const { state } = useContext(AppContext);
   const theme = getTheme(state.themeName);
@@ -48,23 +42,24 @@ const About = () => {
   return (
     <ThemeProvider theme={theme}>
       <StyledContainer>
-        <Heading>Про додаток</Heading>
-        <Text>Це додаток для управління фінансами. Він допоможе вам:</Text>
+        <Heading>
+          <FormattedMessage id="menu.about" />
+        </Heading>
+        <Text>
+          <FormattedMessage id="about.description" />
+        </Text>
         <List>
-          <ListItem>Слідкувати за витратами та доходами.</ListItem>
           <ListItem>
-            Додавати нові або видаляти транзакції в зручний спосіб.
+            <FormattedMessage id="about.feature1" />
           </ListItem>
           <ListItem>
-            Налаштовувати фінансові параметри за вашим вибором.
+            <FormattedMessage id="about.feature2" />
+          </ListItem>
+          <ListItem>
+            <FormattedMessage id="about.feature3" />
           </ListItem>
         </List>
-        <Footer>
-          <div>
-            <span>&#169;</span> 2023
-          </div>
-          <div>Oksana Moroz</div>
-        </Footer>
+        <Footer />
       </StyledContainer>
     </ThemeProvider>
   );

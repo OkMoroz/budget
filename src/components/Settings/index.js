@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { ThemeProvider } from "styled-components";
 import { getTheme } from "../../providers/themes/getTheme";
 import { AppContext } from "../../providers/context";
@@ -6,6 +6,7 @@ import { LOCALES } from "../../providers/i18n";
 import { useBooleanToggle } from "../../hooks";
 import { saveToStorage } from "../../utils/sessionStorage";
 import CurrencyExchange from "../CurrencyExchange";
+import { FormattedMessage } from "react-intl";
 
 import {
   StyledContainer,
@@ -45,41 +46,55 @@ const Setting = () => {
   return (
     <ThemeProvider theme={selectedTheme}>
       <StyledContainer>
-        <Heading>Налаштування</Heading>
+        <Heading>
+          <FormattedMessage id="menu.settings" />
+        </Heading>
 
         <div>
           <form>
             <SelectWrapper>
               <Label>
-                МОВА:
+                <FormattedMessage id="settings.language" />:
                 <CurrencySelect
                   name="locale"
                   onChange={onChangeLocale}
                   value={state.locale}
                 >
-                  <Option value={LOCALES.UKRAINIAN}>Українська</Option>
-                  <Option value={LOCALES.ENGLISH}>English</Option>
+                  <Option value={LOCALES.UKRAINIAN}>
+                    <FormattedMessage id="settings.ukrainian" />
+                  </Option>
+                  <Option value={LOCALES.ENGLISH}>
+                    <FormattedMessage id="settings.english" />
+                  </Option>
                 </CurrencySelect>
               </Label>
             </SelectWrapper>
             <SelectWrapper>
               <Label>
-                ВАЛЮТА:
+                <FormattedMessage id="settings.currency" />:
                 <CurrencySelect
                   name="currency"
                   onChange={onChange}
                   value={state.currency}
                 >
-                  <Option value="UAH">Гривня</Option>
-                  <Option value="USD">Долар США</Option>
-                  <Option value="EUR">Євро</Option>
+                  <Option value="UAH">
+                    <FormattedMessage id="settings.hryvnia" />
+                  </Option>
+                  <Option value="USD">
+                    <FormattedMessage id="settings.usd" />
+                  </Option>
+                  <Option value="EUR">
+                    <FormattedMessage id="settings.euro" />
+                  </Option>
                 </CurrencySelect>
               </Label>
             </SelectWrapper>
           </form>
         </div>
 
-        <Button onClick={handleStatusChange}>Курс валют</Button>
+        <Button onClick={handleStatusChange}>
+          <FormattedMessage id="settings.currencyExchange" />
+        </Button>
 
         {status ? (
           <div>

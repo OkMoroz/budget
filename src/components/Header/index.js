@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { ThemeSwitch } from "../ThemeSwitch";
+
 import { Nav } from "./styles";
 
 const Header = () => (

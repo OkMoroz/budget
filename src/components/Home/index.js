@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Balance from "../Balance";
 import Transactions from "../Transactions";
-
 import ErrorBoundary from "../ErrorBoundary";
-import { ChangeBalance } from "../ChangeBalance";
 
+import { ChangeBalance } from "../ChangeBalance";
 import { Wrapper } from "./styles";
 import { STATUSES } from "../../constants";
 import { useData } from "../../hooks";
