@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { FormattedMessage, useIntl } from "react-intl"; // Додали FormattedMessage та useIntl
 import ExpenseSection from "../ExpenseSection";
 import IncomeSection from "../IncomeSection";
 
@@ -15,6 +16,8 @@ import {
 } from "./styles";
 
 const Form = (props) => {
+  const intl = useIntl();
+
   const [form, setForm] = useState({
     value: "",
     date: new Date().toISOString().substring(0, 10),
@@ -80,17 +83,23 @@ const Form = (props) => {
           <Input
             name="value"
             type="number"
-            placeholder="Сума"
+            placeholder={intl.formatMessage({ id: "form.amount" })}
             value={form.value}
             onChange={onChange}
           />
         </Row>
         <ModalWrapper>
           <CommentWrapper>
-            <Comment name="comment" value={form.comment} onChange={onChange} />
+            <Comment
+              name="comment"
+              value={form.comment}
+              onChange={onChange}
+            />
           </CommentWrapper>
           <ButtonRow>
-            <Button>ЗБЕРЕГТИ</Button>
+            <Button>
+              <FormattedMessage id="form.save" />{" "}
+            </Button>
           </ButtonRow>
         </ModalWrapper>
       </form>

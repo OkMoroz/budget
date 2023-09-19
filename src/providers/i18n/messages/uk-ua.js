@@ -13,7 +13,7 @@ export default {
       feature2: "Додавати нові або видаляти транзакції в зручний спосіб.",
       feature3: "Налаштовувати фінансові параметри за вашим вибором.",
     },
-  settings: {
+    settings: {
       language: "Мова",
       ukrainian: "Українська",
       english: "Англійська",
@@ -22,6 +22,28 @@ export default {
       usd: "Долар США",
       euro: "Євро",
       currencyExchange: "Курс валют",
+    },
+    form: {
+      amount: "Сума",
+      save: "ЗБЕРЕГТИ",
+    },
+    income: {
+      title: "ПРИБУТОК",
+      salary: "ЗАРОБІТНА ПЛАТА",
+      gifts: "ПОДАРУНКИ",
+      other: "ІНШИЙ ДОХІД",
+    },
+    expense: {
+      title: "ВИТРАТИ",
+      products: "ПРОДУКТИ",
+      health: "ЗДОРОВ'Я",
+      home: "ДІМ",
+      education: "НАВЧАННЯ",
+      transport: "ТРАНСПОРТ",
+      leisure: "ДОЗВІЛЛЯ",
+      pets: "ДОМАШНІ УЛЮБЛЕНЦІ",
+      gifts: "ПОДАРУНКИ",
+      other: "ІНШІ ВАРІАНТИ",
     },
   },
 };

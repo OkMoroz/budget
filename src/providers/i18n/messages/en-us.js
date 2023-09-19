@@ -23,5 +23,27 @@ export default {
       euro: "Euro",
       currencyExchange: "Currency Exchange",
     },
+    form: {
+      amount: "Amount",
+      save: "SAVE",
+    },
+    income: {
+      title: "INCOME",
+      salary: "SALARY",
+      gifts: "GIFTS",
+      other: "OTHER INCOME",
+    },
+    expense: {
+      title: "EXPENSES",
+      products: "PRODUCTS",
+      health: "HEALTH",
+      home: "HOME",
+      education: "EDUCATION",
+      transport: "TRANSPORT",
+      leisure: "LEISURE",
+      pets: "PETS",
+      gifts: "GIFTS",
+      other: "OTHER EXPENSES",
+    },
   },
 };

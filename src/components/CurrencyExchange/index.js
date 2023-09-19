@@ -10,7 +10,7 @@ const CurrencyExchange = () => {
         `https://api.exchangeratesapi.io/v1/latest?access_key=ea58ae4a2b7e8d4e2df3006b969ba721`
       );
       const data = await response.json();
-      console.log(data); // Додайте цей рядок
+      console.log(data); 
 
       setExchangeRates(data.rates);
     } catch (error) {
